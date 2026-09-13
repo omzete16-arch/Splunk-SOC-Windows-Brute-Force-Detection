@@ -1,0 +1,7 @@
+source="bruteforce.evtx" host="BEAST" EventCode=4625
+| rex field=_raw "Account Name:\s+(?<TargetUser>\S+)"
+| rex field=_raw "Caller Process Name:\s+(?<ProcessName>.+?)\s+Network Information:"
+| bin _time span=5m
+| stats count as FailedLogins values(ProcessName) as Process by _time TargetUser
+| where FailedLogins >= 5
+| sort - FailedLogins
