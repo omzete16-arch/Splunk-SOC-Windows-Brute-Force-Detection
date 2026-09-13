@@ -1,5 +1,0 @@
-source="bruteforce.evtx" host="BEAST" EventCode=4625
-| rex field=_raw "Account Name:\s+(?<TargetUser>\S+)"
-| rex field=_raw "Caller Process Name:\s+(?<ProcessName>.+?)\s+Network Information:"
-| rex field=_raw "Failure Reason:\s+(?<FailureReason>.*?)\s+Status:"
-| rex field=_raw "Source Network Address:\s+(?<SourceIP>\S+)"
