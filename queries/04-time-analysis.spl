@@ -1,0 +1,3 @@
+source="bruteforce.evtx" host="BEAST" EventCode=4625
+| rex field=_raw "Account Name:\s+(?<TargetUser>\S+)"
+| timechart span=1m count by TargetUser
