@@ -1,0 +1,4 @@
+source="bruteforce.evtx" host="BEAST" EventCode=4625
+| rex field=_raw "Account Name:\s+(?<TargetUser>\S+)"
+| stats count as FailedLogins by TargetUser
+| sort - FailedLogins
